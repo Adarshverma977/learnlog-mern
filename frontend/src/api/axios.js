@@ -1,30 +1,26 @@
 import axios from "axios";
 
-import toast from "react-hot-toast";
-
-
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
+  baseURL:
+    import.meta.env.VITE_API_URL,
 });
 
+axiosInstance.interceptors.request.use(
+  (config) => {
 
-// RESPONSE INTERCEPTOR
-axiosInstance.interceptors.response.use(
+    const token =
+      localStorage.getItem(
+        "token"
+      );
 
-  (response) => response,
+    if (token) {
 
-  (error) => {
-
-    if (error.response?.status === 401) {
-
-      toast.error("Session expired");
-
-      window.location.href = "/login";
+      config.headers.Authorization =
+        `Bearer ${token}`;
 
     }
 
-    return Promise.reject(error);
+    return config;
 
   }
 );
