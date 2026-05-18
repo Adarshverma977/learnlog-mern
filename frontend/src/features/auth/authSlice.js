@@ -124,7 +124,10 @@ export const logout = createAsyncThunk(
 
 
 const initialState = {
-  user: null,
+  user: localStorage.getItem("user") 
+  ? JSON.parse(
+    localStorage.getItem("user")
+  ): null,
   isAuthenticated: false,
   loading: false,
 };
@@ -162,11 +165,21 @@ const authSlice = createSlice({
 
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
+
         state.user = action.payload.user;
+
         state.isAuthenticated = true;
+
         localStorage.setItem(
           "token",
           action.payload.token
+        );
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify(
+            action.payload.user
+          )
         );
       })
 

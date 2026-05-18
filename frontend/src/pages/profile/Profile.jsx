@@ -45,6 +45,11 @@ const Profile = () => {
       (state) => state.profile
     );
 
+  const { user } = 
+    useSelector(
+      (state) => state.auth
+    );
+
   const [name, setName] =
     useState("");
 
@@ -194,7 +199,7 @@ const Profile = () => {
                 <img
                   src={
                     preview ||
-                    `http://localhost:5000/${profile?.profilePhoto}`
+                    `http://localhost:5000/${(profile || user)?.profilePhoto}`
                   }
                   alt=""
                   className="w-44 h-44 rounded-full object-cover border-4 border-indigo-500 shadow-2xl"
@@ -223,13 +228,13 @@ const Profile = () => {
 
                 <h2 className="text-5xl font-black">
 
-                  {profile?.name}
+                  {(profile || user)?.name}
 
                 </h2>
 
                 <p className="text-slate-400 mt-3 text-lg">
 
-                  {profile?.email}
+                  {(profile || user)?.email}
 
                 </p>
 
