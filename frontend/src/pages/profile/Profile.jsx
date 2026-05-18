@@ -199,7 +199,7 @@ const Profile = () => {
                 <img
                   src={
                     preview ||
-                    `http://localhost:5000/${(profile || user)?.profilePhoto}`
+                    `http://localhost:5000/${profile?.profilePhoto || user?.profilePhoto}`
                   }
                   alt=""
                   className="w-44 h-44 rounded-full object-cover border-4 border-indigo-500 shadow-2xl"
@@ -228,13 +228,13 @@ const Profile = () => {
 
                 <h2 className="text-5xl font-black">
 
-                  {(profile || user)?.name}
+                  {profile?.name || user?.email}
 
                 </h2>
 
                 <p className="text-slate-400 mt-3 text-lg">
 
-                  {(profile || user)?.email}
+                  {profile?.email || user?.email}
 
                 </p>
 
