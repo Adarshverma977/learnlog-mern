@@ -25,7 +25,7 @@ export const getProfile =
         const data =
           await getProfileAPI();
 
-        return data.user;
+        return data.profile;
 
       } catch (error) {
 

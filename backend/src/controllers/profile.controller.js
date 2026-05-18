@@ -16,7 +16,7 @@ const getProfile = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      user,
+      profile: user,
     });
 
   } catch (error) {
